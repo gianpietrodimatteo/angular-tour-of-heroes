@@ -51,37 +51,29 @@
     >{{ hero.name }}
   </li>
 </ul>
-
-<p>*ngIf is angular's if directive</p>
+<p>The HeroesComponent is still a master/detail view.</p>
 <ul>
   <li>
-    When selectedHero is undefined, the ngIf removes the hero detail from the
-    DOM.
-  </li>
-  <li>
-    There are no selectedHero bindings to consider. In this case we see
-    undefined being coerced to false.
+    The two components will have a parent/child relationship. The parent
+    HeroesComponent will control the child HeroDetailComponent by sending it a
+    new hero to display whenever the user selects a hero from the list.
   </li>
 </ul>
-<div *ngIf="selectedHero">
-  <p>
-    The word uppercase in the interpolation binding, right after the pipe
-    operator ( | ), activates the built-in UppercasePipe.
-  </p>
-  <ul>
-    <li>
-      <a href="https://angular.io/guide/pipes">Pipes</a> are a good way to
-      format strings, currency amounts, dates and other display data. Angular
-      ships with several built-in pipes and you can create your own.
-    </li>
-  </ul>
-  <h2>{{ selectedHero.name | uppercase }} Details</h2>
-  <div><span>id: </span>{{ selectedHero.id }}</div>
-  <div>
-    <p>[(ngModel)] is Angular's two-way data binding syntax.</p>
-    <label
-      >name:
-      <input [(ngModel)]="selectedHero.name" placeholder="name" />
-    </label>
-  </div>
-</div>
+<p>
+  <code>[hero]="selectedHero"</code> is an Angular
+  <a href="https://angular.io/guide/template-syntax#property-binding"
+    >property binding</a
+  >.
+</p>
+<ul>
+  <li>
+    It's a one way data binding from the selectedHero property of the
+    HeroesComponent to the hero property of the target element, which maps to
+    the hero property of the HeroDetailComponent.
+  </li>
+  <li>
+    The [hero] property is how this parent component binds to it's child's
+    component's input
+  </li>
+</ul>
+<app-hero-detail [hero]="selectedHero"></app-hero-detail>
