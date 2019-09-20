@@ -6,14 +6,15 @@ import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/heroes.component';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 
+// Some of the metadata is in the @NgModule decorators.
 @NgModule({
   declarations: [
     AppComponent,
-    HeroesComponent
+    HeroesComponent //Every component must be declared in exactly one NgModule.
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    FormsModule, // Then add FormsModule to the @NgModule metadata's imports array.
     AppRoutingModule
   ],
   providers: [],
