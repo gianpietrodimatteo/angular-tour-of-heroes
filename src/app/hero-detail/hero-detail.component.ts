@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Hero } from "../hero";
 
+// Components should focus on presenting data and delegate data access to a service.
 @Component({
   selector: "app-hero-detail",
   templateUrl: "./hero-detail.component.html",
