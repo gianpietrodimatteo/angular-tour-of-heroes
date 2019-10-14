@@ -23,7 +23,7 @@ export class HeroesComponent implements OnInit {
   // };
 
   heroes: Hero[];
-
+  // TODO remove onSelect and selectedHero
   // selectedHero: Hero = this.hero;
   selectedHero: Hero;
   /*

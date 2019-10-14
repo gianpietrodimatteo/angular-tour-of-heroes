@@ -41,6 +41,14 @@ export class HeroService {
     return of(HEROES);
   }
 
+  getHero(id: number): Observable<Hero> {
+    // TODO: send the message after fetching the hero
+    // Note the backticks ( ` ) that define a JavaScript template literal for embedding the id.
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+    this.messageService.add(`HeroService: fetched hero id=${id}`);
+    return of(HEROES.find(hero => hero.id === id));
+  }
+
   /*
   This is a typical "service-in-service" scenario:
   you inject the MessageService into the HeroService which is injected

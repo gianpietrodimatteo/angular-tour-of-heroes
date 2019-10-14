@@ -42,13 +42,17 @@
   </li>
 </ul>
 <ul class="heroes">
-  <li
+  <!-- This can be used instead for a simpler solution on the same page -->
+  <!-- <li
     *ngFor="let hero of heroes"
     [class.selected]="hero === selectedHero"
     (click)="onSelect(hero)"
-  >
-    <span class="badge">{{ hero.id }}</span
-    >{{ hero.name }}
+  > -->
+  <li *ngFor="let hero of heroes">
+    <a routerLink="/detail/{{ hero.id }}">
+      <span class="badge">{{ hero.id }}</span
+      >{{ hero.name }}
+    </a>
   </li>
 </ul>
 <p>The HeroesComponent is still a master/detail view.</p>
@@ -76,4 +80,6 @@
     component's input
   </li>
 </ul>
-<app-hero-detail [hero]="selectedHero"></app-hero-detail>
+<!-- this is in order to show at the bottom -->
+<!-- now we have a dedicated page for it -->
+<!-- <app-hero-detail [hero]="selectedHero"></app-hero-detail> -->
