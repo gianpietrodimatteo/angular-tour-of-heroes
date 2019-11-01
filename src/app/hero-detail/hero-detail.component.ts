@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { Hero } from "../hero";
-import { ActivatedRoute } from "@angular/router";
-import { HeroService } from "../hero.service";
-import { Location } from "@angular/common";
+import { Component, OnInit, Input } from '@angular/core';
+import { Hero } from '../hero';
+import { ActivatedRoute } from '@angular/router';
+import { HeroService } from '../hero.service';
+import { Location } from '@angular/common';
 
 /*
 The HeroDetailComponent needs a new way to obtain the hero-to-display. This section explains the following:
@@ -14,9 +14,9 @@ Acquire the hero with that id from the server via the HeroService
 
 // Components should focus on presenting data and delegate data access to a service.
 @Component({
-  selector: "app-hero-detail",
-  templateUrl: "./hero-detail.component.html",
-  styleUrls: ["./hero-detail.component.scss"]
+  selector: 'app-hero-detail',
+  templateUrl: './hero-detail.component.html',
+  styleUrls: ['./hero-detail.component.scss']
 })
 export class HeroDetailComponent implements OnInit {
   /*
@@ -47,7 +47,7 @@ export class HeroDetailComponent implements OnInit {
     The JavaScript (+) operator converts the string to a number.
     */
 
-    const id = +this.route.snapshot.paramMap.get("id");
+    const id = +this.route.snapshot.paramMap.get('id');
     this.heroService.getHero(id).subscribe(hero => (this.hero = hero));
   }
 
@@ -55,9 +55,12 @@ export class HeroDetailComponent implements OnInit {
   Add a goBack() method to the component class that navigates backward one step in
   the browser's history stack using the Location service that you injected previously.
   */
-  //https://angular.io/api/common/Location
-  //https://angular.io/tutorial/toh-pt5#hero-detail-ctor
+  // https://angular.io/api/common/Location
+  // https://angular.io/tutorial/toh-pt5#hero-detail-ctor
   goBack(): void {
     this.location.back();
+  }
+  save(): void {
+    this.heroService.updateHero(this.hero).subscribe(() => this.goBack());
   }
 }

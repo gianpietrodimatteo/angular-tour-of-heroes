@@ -1,7 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import { Hero } from "../hero";
-import { HEROES } from "../mock-heroes";
-import { HeroService } from "../hero.service";
+import { Component, OnInit } from '@angular/core';
+import { Hero } from '../hero';
+import { HEROES } from '../mock-heroes';
+import { HeroService } from '../hero.service';
 
 /*
 The CLI generated three metadata properties:
@@ -11,9 +11,9 @@ templateUrl— the location of the component's template file.
 styleUrls— the location of the component's private CSS styles.
 */
 @Component({
-  selector: "app-heroes",
-  templateUrl: "./heroes.component.html",
-  styleUrls: ["./heroes.component.scss"]
+  selector: 'app-heroes',
+  templateUrl: './heroes.component.html',
+  styleUrls: ['./heroes.component.scss']
 })
 export class HeroesComponent implements OnInit {
   // Commented hero out to not display the hero details page on load
@@ -48,10 +48,10 @@ export class HeroesComponent implements OnInit {
     // synchronous representation (would not work in real situation)
     // this.heroes = this.heroService.getHeroes();
     /*
-    The new version waits for the Observable to emit the array of heroes—which could happen now or several minutes from now. The subscribe() method passes the emitted array to the callback, which sets the component's heroes property.
+    The new version waits for the Observable to emit the array of heroes—which could happen now or several minutes from now.
+    The subscribe() method passes the emitted array to the callback, which sets the component's heroes property.
     */
-    this.heroService.getHeroes()
-    .subscribe(heroes => this.heroes = heroes);
+    this.heroService.getHeroes().subscribe(heroes => (this.heroes = heroes));
   }
 
   // The ngOnInit() is a lifecycle hook. Angular calls ngOnInit() shortly after creating a component.
@@ -65,5 +65,23 @@ export class HeroesComponent implements OnInit {
   // https://angular.io/guide/lifecycle-hooks
   ngOnInit() {
     this.getHeroes();
+  }
+  // When addHero() saves successfully, the subscribe() callback receives the new hero and pushes it into to the heroes list for display.
+  add(name: string): void {
+    name = name.trim();
+    if (!name) {
+      return;
+    }
+    this.heroService.addHero({ name } as Hero).subscribe(hero => {
+      this.heroes.push(hero);
+    });
+  }
+  // Although the component delegates hero deletion to the HeroService, it remains responsible for updating its own list of heroes.
+  // The component's delete() method immediately removes the hero-to-delete from that list, anticipating that the HeroService will succeed on the server.
+
+  // There's really nothing for the component to do with the Observable returned by heroService.delete() but it must subscribe anyway.
+  delete(hero: Hero): void {
+    this.heroes = this.heroes.filter(h => h !== hero);
+    this.heroService.deleteHero(hero).subscribe();
   }
 }

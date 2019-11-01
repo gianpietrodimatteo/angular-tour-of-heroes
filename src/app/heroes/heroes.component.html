@@ -1,4 +1,18 @@
 <h2>My Heroes</h2>
+<p>
+  To add a hero, this app only needs the hero's name. You can use an
+  <input /> element paired with an add button.
+</p>
+<div>
+  <label
+    >Hero name:
+    <input #heroName />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(heroName.value); heroName.value = ''">
+    add
+  </button>
+</div>
 <p>*ngFor is angular's repeater directive and needs the asterisk</p>
 <ul>
   <li>&#60;li&#62; is the host element.</li>
@@ -53,6 +67,7 @@
       <span class="badge">{{ hero.id }}</span
       >{{ hero.name }}
     </a>
+    <button class="delete" title="delete hero" (click)="delete(hero)">x</button>
   </li>
 </ul>
 <p>The HeroesComponent is still a master/detail view.</p>
