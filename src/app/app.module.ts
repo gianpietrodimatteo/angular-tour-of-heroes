@@ -15,8 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
+import { TutorialExcerptComponent } from './tutorial-excerpt/tutorial-excerpt.component';
 
-// Some of the metadata is in the @NgModule decorators.
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,19 +24,16 @@ import { HeroSearchComponent } from './hero-search/hero-search.component';
     HeroDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    HeroSearchComponent // Every component must be declared in exactly one NgModule.
+    HeroSearchComponent,
+    TutorialExcerptComponent
   ],
   imports: [
     HttpClientModule,
-
-    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-    // and returns simulated server responses.
-    // Remove it when a real server is ready to receive requests.
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
       dataEncapsulation: false
     }),
     BrowserModule,
-    FormsModule, // Then add FormsModule to the @NgModule metadata's imports array.
+    FormsModule,
     AppRoutingModule
   ],
   providers: [],

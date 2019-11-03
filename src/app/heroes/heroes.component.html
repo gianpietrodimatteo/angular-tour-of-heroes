@@ -1,67 +1,14 @@
 <h2>My Heroes</h2>
-<p>
-  To add a hero, this app only needs the hero's name. You can use an
-  <input /> element paired with an add button.
-</p>
 <div>
   <label
     >Hero name:
     <input #heroName />
   </label>
-  <!-- (click) passes input value to add() and then clears the input -->
   <button (click)="add(heroName.value); heroName.value = ''">
     add
   </button>
 </div>
-<p>*ngFor is angular's repeater directive and needs the asterisk</p>
-<ul>
-  <li>&#60;li&#62; is the host element.</li>
-  <li>
-    heroes holds the mock heroes list from the HeroesComponent class, the mock
-    heroes list.
-  </li>
-  <li>
-    hero holds the current hero object for each iteration through the list.
-  </li>
-</ul>
-<p>
-  (click) is an example of Angular's
-  <a href="https://angular.io/guide/template-syntax#event-binding"
-    >event binding</a
-  >
-  syntax.
-</p>
-<ul>
-  <li>
-    The parentheses around click tell Angular to listen for the &#60;li&#62;
-    element's click event.
-  </li>
-  <li>
-    When the user clicks in the &#60;li&#62;, Angular executes the
-    onSelect(hero) expression.
-  </li>
-</ul>
-<p>
-  The Angular
-  <a href="https://angular.io/guide/template-syntax#class-binding"
-    >class binding</a
-  >
-  makes it easy to add and remove a CSS class conditionally.
-</p>
-<ul>
-  <li>
-    Just add
-    <code>[class.some-css-class]="some-condition"</code> to the element you want
-    to style.
-  </li>
-</ul>
 <ul class="heroes">
-  <!-- This can be used instead for a simpler solution on the same page -->
-  <!-- <li
-    *ngFor="let hero of heroes"
-    [class.selected]="hero === selectedHero"
-    (click)="onSelect(hero)"
-  > -->
   <li *ngFor="let hero of heroes">
     <a routerLink="/detail/{{ hero.id }}">
       <span class="badge">{{ hero.id }}</span
@@ -70,31 +17,3 @@
     <button class="delete" title="delete hero" (click)="delete(hero)">x</button>
   </li>
 </ul>
-<p>The HeroesComponent is still a master/detail view.</p>
-<ul>
-  <li>
-    The two components will have a parent/child relationship. The parent
-    HeroesComponent will control the child HeroDetailComponent by sending it a
-    new hero to display whenever the user selects a hero from the list.
-  </li>
-</ul>
-<p>
-  <code>[hero]="selectedHero"</code> is an Angular
-  <a href="https://angular.io/guide/template-syntax#property-binding"
-    >property binding</a
-  >.
-</p>
-<ul>
-  <li>
-    It's a one way data binding from the selectedHero property of the
-    HeroesComponent to the hero property of the target element, which maps to
-    the hero property of the HeroDetailComponent.
-  </li>
-  <li>
-    The [hero] property is how this parent component binds to it's child's
-    component's input
-  </li>
-</ul>
-<!-- this is in order to show at the bottom -->
-<!-- now we have a dedicated page for it -->
-<!-- <app-hero-detail [hero]="selectedHero"></app-hero-detail> -->

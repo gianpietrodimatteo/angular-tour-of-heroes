@@ -1,0 +1,352 @@
+<h1>Dashboard:</h1>
+<p>
+  You're using Angular
+  <a href="https://angular.io/guide/template-syntax#interpolation"
+    >interpolation binding</a
+  >
+  within the
+  <code>*<a href="api/common/NgForOf" class="code-anchor">ngFor</a></code>
+  repeater to insert the current iteration's <code>hero.id</code> into each
+  <code>routerLink</code>.
+</p>
+
+<h1>Hero detail:</h1>
+<p>*ngIf is angular's if directive</p>
+<ul>
+  <li>
+    When selectedHero is undefined, the ngIf removes the hero detail from the
+    DOM.
+  </li>
+  <li>
+    There are no selectedHero bindings to consider. In this case we see
+    undefined being coerced to false.
+  </li>
+</ul>
+<p>
+  The word uppercase in the interpolation binding, right after the pipe operator
+  ( | ), activates the built-in UppercasePipe.
+</p>
+<ul>
+  <li>
+    <a href="https://angular.io/guide/pipes">Pipes</a> are a good way to format
+    strings, currency amounts, dates and other display data. Angular ships with
+    several built-in pipes and you can create your own.
+  </li>
+</ul>
+<p>[(ngModel)] is Angular's two-way data binding syntax.</p>
+<p>If you want changes to persist, you must write them back to the server.</p>
+<p>
+  /* The HeroDetailComponent needs a new way to obtain the hero-to-display. This
+  section explains the following: Get the route that created it Extract the id
+  from the route Acquire the hero with that id from the server via the
+  HeroService */ // Components should focus on presenting data and delegate data
+  access to a service. /* The hero property must be an Input property, annotated
+  with the @Input() decorator, because the external HeroesComponent will bind to
+  it like this. */ // https://angular.io/guide/template-syntax#inputs-outputs /*
+  The route.snapshot is a static image of the route information shortly after
+  the component was created. The paramMap is a dictionary of route parameter
+  values extracted from the URL. The "id" key returns the id of the hero to
+  fetch. Route parameters are always strings. The JavaScript (+) operator
+  converts the string to a number. */ /* Add a goBack() method to the component
+  class that navigates backward one step in the browser's history stack using
+  the Location service that you injected previously. */ //
+  https://angular.io/api/common/Location //
+  https://angular.io/tutorial/toh-pt5#hero-detail-ctor
+</p>
+
+<h1>Hero search:</h1>
+<p>
+  Every time the user types in the textbox, the binding calls search() with the
+  textbox value, a "search term". The searchTerms becomes an Observable emitting
+  a steady stream of search terms.
+</p>
+<p>
+  Notice that the *ngFor iterates over a list called heroes$, not heroes. The $
+  is a convention that indicates heroes$ is an Observable, not an array.
+</p>
+<p>
+  Since *ngFor can't do anything with an Observable, use the pipe character (|)
+  followed by async. This identifies Angular's AsyncPipe and subscribes to an
+  Observable automatically so you won't have to do so in the component class.
+</p>
+<p>
+  // Notice the declaration of heroes$ as an Observable: // Remember that the
+  component class does not subscribe to the heroes$ observable. That's the job
+  of the AsyncPipe in the template. // A Subject is both a source of observable
+  values and an Observable itself. You can subscribe to a Subject as you would
+  any Observable. // You can also push values into that Observable by calling
+  its next(value) method as the search() method does. // Push a search term into
+  the observable stream. // wait 300ms after each keystroke before considering
+  the term // ignore new term if same as previous term //
+  http://www.learnrxjs.io/operators/transformation/switchmap.html // switchMap()
+  preserves the original request order while returning only the observable from
+  the most recent HTTP method call. // Results from prior calls are canceled and
+  discarded. // switch to new search observable each time the term changes
+</p>
+
+<h1>Heroes:</h1>
+<p>
+  To add a hero, this app only needs the hero's name. You can use an
+  <input /> element paired with an add button.
+</p>
+<p>(click) passes input value to add() and then clears the input</p>
+<p>*ngFor is angular's repeater directive and needs the asterisk</p>
+<ul>
+  <li>&#60;li&#62; is the host element.</li>
+  <li>
+    heroes holds the mock heroes list from the HeroesComponent class, the mock
+    heroes list.
+  </li>
+  <li>
+    hero holds the current hero object for each iteration through the list.
+  </li>
+</ul>
+<p>
+  (click) is an example of Angular's
+  <a href="https://angular.io/guide/template-syntax#event-binding"
+    >event binding</a
+  >
+  syntax.
+</p>
+<ul>
+  <li>
+    The parentheses around click tell Angular to listen for the &#60;li&#62;
+    element's click event.
+  </li>
+  <li>
+    When the user clicks in the &#60;li&#62;, Angular executes the
+    onSelect(hero) expression.
+  </li>
+</ul>
+<p>
+  The Angular
+  <a href="https://angular.io/guide/template-syntax#class-binding"
+    >class binding</a
+  >
+  makes it easy to add and remove a CSS class conditionally.
+</p>
+<ul>
+  <li>
+    Just add
+    <code>[class.some-css-class]="some-condition"</code> to the element you want
+    to style.
+  </li>
+</ul>
+<!-- This can be used instead for a simpler solution on the same page -->
+<!-- <li
+    *ngFor="let hero of heroes"
+    [class.selected]="hero === selectedHero"
+    (click)="onSelect(hero)"
+  > -->
+<p>The HeroesComponent is still a master/detail view.</p>
+<ul>
+  <li>
+    The two components will have a parent/child relationship. The parent
+    HeroesComponent will control the child HeroDetailComponent by sending it a
+    new hero to display whenever the user selects a hero from the list.
+  </li>
+</ul>
+<p>
+  <code>[hero]="selectedHero"</code> is an Angular
+  <a href="https://angular.io/guide/template-syntax#property-binding"
+    >property binding</a
+  >.
+</p>
+<ul>
+  <li>
+    It's a one way data binding from the selectedHero property of the
+    HeroesComponent to the hero property of the target element, which maps to
+    the hero property of the HeroDetailComponent.
+  </li>
+  <li>
+    The [hero] property is how this parent component binds to it's child's
+    component's input
+  </li>
+</ul>
+<!-- this is in order to show at the bottom -->
+<!-- now we have a dedicated page for it -->
+<!-- <app-hero-detail [hero]="selectedHero"></app-hero-detail> -->
+<p>
+  /* The CLI generated three metadata properties: selector— the component's CSS
+  element selector templateUrl— the location of the component's template file.
+  styleUrls— the location of the component's private CSS styles. */ // Commented
+  hero out to not display the hero details page on load // hero: Hero = // id:
+  1, // name: "Windstorm" // ; // TODO remove onSelect and selectedHero //
+  selectedHero: Hero = this.hero; selectedHero: Hero; /* Add the following
+  onSelect() method, which assigns the clicked hero from the template to the
+  component's selectedHero.*/ onSelect(hero: Hero): void this.selectedHero =
+  hero; /* When Angular creates a HeroesComponent, the Dependency Injection
+  system sets the heroService parameter to the singleton instance of
+  HeroService. */ // https://angular.io/guide/dependency-injection // here you
+  wire constructor parameters to properties // The constructor shouldn't
+  ***do*** anything. // synchronous representation (would not work in real
+  situation) // this.heroes = this.heroService.getHeroes(); /* The new version
+  waits for the Observable to emit the array of heroes—which could happen now or
+  several minutes from now. The subscribe() method passes the emitted array to
+  the callback, which sets the component's heroes property. */ // The ngOnInit()
+  is a lifecycle hook. Angular calls ngOnInit() shortly after creating a
+  component. // https://angular.io/guide/lifecycle-hooks#oninit // It's a good
+  place to put initialization logic. /* call getHeroes() inside the ngOnInit
+  lifecycle hook and let Angular call ngOnInit() at an appropriate time after
+  constructing a HeroesComponent instance. */ //
+  https://angular.io/guide/lifecycle-hooks // When addHero() saves successfully,
+  the subscribe() callback receives the new hero and pushes it into to the
+  heroes list for display. // Although the component delegates hero deletion to
+  the HeroService, it remains responsible for updating its own list of heroes.
+  // The component's delete() method immediately removes the hero-to-delete from
+  that list, // anticipating that the HeroService will succeed on the server. //
+  There's really nothing for the component to do with the Observable returned by
+  heroService.delete() but it must subscribe anyway.
+</p>
+
+<h1>Messages:</h1>
+<p>
+  This template binds directly to the component's <code>messageService</code>.
+</p>
+<ul>
+  <li>
+    The
+    <code>*ngIf</code> only displays the messages area if there are messages to
+    show.
+  </li>
+</ul>
+<ul>
+  <li>
+    An
+    <code>*ngFor</code>
+    presents the list of messages in repeated
+    <code>&lt;div&gt;</code> elements.
+  </li>
+</ul>
+<ul>
+  <li>
+    An Angular
+    <a href="https://angular.io/guide/template-syntax#event-binding"
+      >event binding</a
+    >
+    binds the button's click event to <code>MessageService.clear()</code>.
+  </li>
+</ul>
+<p>
+  /* The messageService property must be public because you're going to bind to
+  it in the template. Angular only binds to public component properties. */
+</p>
+
+<h1>App (root):</h1>
+<p>
+  Remember that <code>app-heroes</code> is the element selector for the
+  <code>HeroesComponent</code>.
+</p>
+<p>
+  The RouterOutlet is one of the router directives that became available to the
+  AppComponent because AppModule imports AppRoutingModule which exported
+  RouterModule.
+</p>
+<p>
+  A
+  <a href="https://angular.io/tutorial/toh-pt5#routerlink"
+    ><code>routerLink</code> attribute</a
+  >
+  is set to <code>"/heroes"</code>, the string that the router matches to the
+  route to <code>HeroesComponent</code>. The
+  <code
+    ><a href="https://angular.io/api/router/RouterLink" class="code-anchor"
+      >routerLink</a
+    ></code
+  >
+  is the selector for the
+  <a href="https://angular.io/api/router/RouterLink"
+    ><code>RouterLink</code> directive</a
+  >
+  that turns user clicks into router navigations. It's another of the public
+  directives in the
+  <code
+    ><a href="https://angular.io/api/router/RouterModule" class="code-anchor"
+      >RouterModule</a
+    ></code
+  >.
+</p>
+<p>
+  // Some of the metadata is in the @Component decorators that you added to your
+  component classes.
+</p>
+
+<h1>Routing:</h1>
+<p>
+  /* A typical Angular Route has two properties: path: a string that matches the
+  URL in the browser address bar. component: the component that the router
+  should create when navigating to this route */ // parameterized route. The
+  colon (:) in the path indicates that :id is a placeholder for a specific hero
+  id. // Import and Configure /* The method is called forRoot() because you
+  configure the router at the application's root level. The forRoot() method
+  supplies the service providers and directives needed for routing, and performs
+  the initial navigation based on the current browser URL. */ // Then export to
+  be available throuout the app
+</p>
+
+<h1>Module (root):</h1>
+<p>
+  // Some of the metadata is in the @NgModule decorators. // Every component
+  must be declared in exactly one NgModule. // The
+  HttpClientInMemoryWebApiModule module intercepts HTTP requests // and returns
+  simulated server responses. // Remove it when a real server is ready to
+  receive requests. // Then add FormsModule to the @NgModule metadata's imports
+  array.
+</p>
+
+<h1>Service:</h1>
+<p>
+  /* Class is annotated with the @Injectable() decorator. This marks the class
+  as one that participates in the dependency injection system. The HeroService
+  class is going to provide an injectable service, and it can also have its own
+  injected dependencies. */ // https://angular.io/guide/dependency-injection /*
+  The @Injectable() decorator accepts a metadata object for the service, the
+  same way the @Component() decorator did for your component classes. */ /* You
+  must make the HeroService available to the dependency injection system before
+  Angular can inject it into the HeroesComponent by registering a provider.
+  Registers a provider with the root injector for your service by including
+  provider metadata. When you provide the service at the root level, Angular
+  creates a single, shared instance of HeroService and injects into any class
+  that asks for it. */ // https://angular.io/guide/providers // URL to web api
+  // The heroes web API expects a special header in HTTP save requests. // That
+  header is in the httpOptions constant defined in the HeroService. // Return
+  the hard coded mock heroes // getHeroes(): Hero[] // return HEROES; // // Same
+  as above, but with observables // getHeroes(): Observable &lt Hero[] &gt //
+  this.messageService.add('HeroService: fetched heroes'); // of(HEROES) returns
+  an Observable&ltHero[]&gt that emits a single value, the array of mock heroes.
+  // return of(HEROES); /** GET heroes from the server */ // of and http.get()
+  return observable of hero so that's the same thing for the rest of the website
+  return ( this.http .get&ltHero[]&gt(this.heroesUrl) // To catch errors, you
+  "pipe" the observable result from http.get() through an RxJS catchError()
+  operator. // The catchError() operator intercepts an Observable that failed.
+  // It passes the error an error handler that can do what it wants with the
+  error. .pipe( // RxJS tap() operator, which looks at the observable values,
+  does something with those values, and passes them along. // The tap() call
+  back doesn't touch the values themselves. tap(_ =&gt this.log('fetched
+  heroes')), catchError(this.handleError&ltHero[]&gt('getHeroes', [])) ) ); //
+  Note the backticks ( ` ) that define a JavaScript template literal for
+  embedding the id. //
+  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+  // this.messageService.add(`HeroService: fetched hero id=$id`); // return
+  of(HEROES.find(hero =&gt hero.id === id)); /* This is a typical
+  "service-in-service" scenario: you inject the MessageService into the
+  HeroService which is injected into the HeroesComponent. */ // HttpClient
+  methods return an RxJS Observable. // An HTTP request returns a single
+  response. // In theory an observble can return multiple values. // In practice
+  the HttpClient.get() method returns a single value as an untyped json for
+  default. // You can optionaly specify the type with the &ltClass&gt. // Notice
+  that you keep injecting the MessageService but since you'll call it so
+  frequently, wrap it in a private log() method: /** Log a HeroService message
+  with the MessageService */ // It expects the server to generate an id for the
+  new hero, which it returns in the Observable&ltHero&gt to the caller. // You
+  still send the httpOptions. // The method returns immediately with an empty
+  array if there is no search term. // The rest of it closely resembles
+  getHeroes(), the only significant difference being the URL, // which includes
+  a query string with the search term. // The following handleError() will be
+  shared by many HeroService methods so it's generalized to meet their different
+  needs. // The in-memory-data.service.ts file replaces mock-heroes.ts, which is
+  now safe to delete. // When the server is ready, you'll detach the In-memory
+  Web API, and the app's requests will go through to the server. /* The service
+  exposes its cache of messages and two methods: one to add() a message to the
+  cache and another to clear() the cache. */ // Hero Object Array
+</p>

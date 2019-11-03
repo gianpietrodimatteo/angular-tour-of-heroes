@@ -33,6 +33,3 @@ export class InMemoryDataService implements InMemoryDbService {
       : 11;
   }
 }
-// The in-memory-data.service.ts file replaces mock-heroes.ts, which is now safe to delete.
-
-// When the server is ready, you'll detach the In-memory Web API, and the app's requests will go through to the server.

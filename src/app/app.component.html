@@ -1,40 +1,8 @@
 <h1>{{ title }}</h1>
-<p>
-  Remember that <code>app-heroes</code> is the element selector for the
-  <code>HeroesComponent</code>.
-</p>
-<p>
-  The RouterOutlet is one of the router directives that became available to the
-  AppComponent because AppModule imports AppRoutingModule which exported
-  RouterModule.
-</p>
-<p>
-  A
-  <a href="https://angular.io/tutorial/toh-pt5#routerlink"
-    ><code>routerLink</code> attribute</a
-  >
-  is set to <code>"/heroes"</code>, the string that the router matches to the
-  route to <code>HeroesComponent</code>. The
-  <code
-    ><a href="https://angular.io/api/router/RouterLink" class="code-anchor"
-      >routerLink</a
-    ></code
-  >
-  is the selector for the
-  <a href="https://angular.io/api/router/RouterLink"
-    ><code>RouterLink</code> directive</a
-  >
-  that turns user clicks into router navigations. It's another of the public
-  directives in the
-  <code
-    ><a href="https://angular.io/api/router/RouterModule" class="code-anchor"
-      >RouterModule</a
-    ></code
-  >.
-</p>
 <nav>
   <a routerLink="/dashboard">Dashboard</a>
   <a routerLink="/heroes">Heroes</a>
+  <a routerLink="/tutorial-excerpts">Tutorial Excerpts</a>
 </nav>
 <router-outlet></router-outlet>
 <app-messages></app-messages>

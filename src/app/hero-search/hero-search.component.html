@@ -1,22 +1,6 @@
 <div id="search-component">
   <h4><label for="search-box">Hero Search</label></h4>
-  <p>
-    Every time the user types in the textbox, the binding calls search() with
-    the textbox value, a "search term". The searchTerms becomes an Observable
-    emitting a steady stream of search terms.
-  </p>
   <input #searchBox id="search-box" (input)="search(searchBox.value)" />
-  <p>
-    Notice that the *ngFor iterates over a list called heroes$, not heroes. The
-    $ is a convention that indicates heroes$ is an Observable, not an array.
-  </p>
-
-  <p>
-    Since *ngFor can't do anything with an Observable, use the pipe character
-    (|) followed by async. This identifies Angular's AsyncPipe and subscribes to
-    an Observable automatically so you won't have to do so in the component
-    class.
-  </p>
   <ul class="search-result">
     <li *ngFor="let hero of heroes$ | async">
       <a routerLink="/detail/{{ hero.id }}">
